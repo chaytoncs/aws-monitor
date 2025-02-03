@@ -1,4 +1,4 @@
-# dashboard-tutorial
+# aws-monitor
 
 AWS Monitor is a React-based application for monitoring AWS Auto Scaling Groups (ASGs) and their instances. It provides a user-friendly interface for viewing and managing ASGs, offering detailed information about each group and its associated instances.
 
