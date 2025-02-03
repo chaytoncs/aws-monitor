@@ -5,7 +5,6 @@ import Link from "next/link"
 
 export default async function Page() {
   const asg = await getASGWithInstances("WebServerGroup")
-  console.log(asg)
   return (
     <div className='min-h-screen bg-gradient-to-b from-background to-secondary/20 dark:from-aws-dark dark:to-[#141619]'>
       <main className='p-8'>
