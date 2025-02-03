@@ -6,6 +6,8 @@
     "start": "next start"
   },
   "dependencies": {
+    "@aws-sdk/client-auto-scaling": "^3.738.0",
+    "@aws-sdk/client-ec2": "^3.738.0",
     "@heroicons/react": "^2.2.0",
     "@radix-ui/react-slot": "^1.1.1",
     "@tailwindcss/forms": "^0.5.10",
