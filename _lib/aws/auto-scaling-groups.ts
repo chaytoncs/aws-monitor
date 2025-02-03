@@ -8,9 +8,9 @@ import { Instance } from "@aws-sdk/client-ec2"
 import { getEC2Instances } from "./ec2-instances"
 import { mockAutoScalingGroups } from "./mocks/mock-data"
 
-export async function getAutoScalingGroups(
+export async function getAutoScalingGroup(
   asgName: string
-): Promise<AutoScalingGroup[]> {
+): Promise<AutoScalingGroup | null> {
   // Uncomment actual SDK call and remove mock data return
   // try {
   //   const client = new AutoScalingClient()
@@ -28,14 +28,16 @@ export async function getAutoScalingGroups(
   //     !response.AutoScalingGroups ||
   //     response.AutoScalingGroups.length === 0
   //   ) {
-  //     console.log("No records")
-  //     return []
+  //     return null
   //   }
-  //   return response?.AutoScalingGroups
+  //   return response?.AutoScalingGroups[0]
   // } catch (error) {
-  //   return []
+  //   return null
   // }
-  return mockAutoScalingGroups
+  return (
+    mockAutoScalingGroups.find((asg) => asg.AutoScalingGroupName === asgName) ||
+    null
+  )
 }
 
 export interface ASGWithInstances extends AutoScalingGroup {
@@ -44,19 +46,23 @@ export interface ASGWithInstances extends AutoScalingGroup {
 
 export async function getASGWithInstances(
   asgName: string
-): Promise<ASGWithInstances[]> {
-  const asgGroups = await getAutoScalingGroups(asgName)
-  const allInstanceIds = asgGroups.flatMap(
-    (asg) => asg.Instances?.map((instance) => instance.InstanceId || "") || []
-  )
+): Promise<ASGWithInstances | null> {
+  const asg = await getAutoScalingGroup(asgName)
+  if (!asg) {
+    return null
+  }
+
+  const allInstanceIds =
+    asg.Instances?.map((instance) => instance.InstanceId || "") || []
+
   const ec2Instances = await getEC2Instances(allInstanceIds)
 
-  return asgGroups.map((asg) => ({
+  return {
     ...asg,
     EC2Instances: ec2Instances.filter((instance) =>
       asg.Instances?.some(
         (asgInstance) => asgInstance.InstanceId === instance.InstanceId
       )
     ),
-  }))
+  }
 }
