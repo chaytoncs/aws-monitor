@@ -5,7 +5,7 @@ import {
   DescribeInstancesCommandOutput,
 } from "@aws-sdk/client-ec2"
 import { mockEC2Instances } from "./mocks/mock-data"
-import { AWS_CONFIG } from "./auto-scaling-groups"
+import { AWS_CONFIG } from "./config"
 
 export async function getEC2Instances(
   instanceIds: string[]
