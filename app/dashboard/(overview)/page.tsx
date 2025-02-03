@@ -1,7 +1,7 @@
 export default function Page() {
   return (
-    <div className='min-h-screen bg-gradient-to-b from-background to-secondary/20 dark:from-aws-dark dark:to-[#141619]"'>
-      Welcome to the Dashboard
-    </div>
+    <h1 className='text-2xl font-bold text-foreground dark:text-white tracking-tight mb-6'>
+      Welcome to AWS Monitor
+    </h1>
   )
 }
