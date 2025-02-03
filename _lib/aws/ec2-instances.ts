@@ -5,13 +5,14 @@ import {
   DescribeInstancesCommandOutput,
 } from "@aws-sdk/client-ec2"
 import { mockEC2Instances } from "./mocks/mock-data"
+import { AWS_CONFIG } from "./auto-scaling-groups"
 
 export async function getEC2Instances(
   instanceIds: string[]
 ): Promise<Instance[]> {
   // Uncomment actual SDK call and remove mock data return
   // try {
-  //   const client = new EC2Client()
+  //   const client = new EC2Client(AWS_CONFIG)
   //   const command = new DescribeInstancesCommand({
   //     InstanceIds: instanceIds,
   //   })

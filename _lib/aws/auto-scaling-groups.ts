@@ -1,5 +1,6 @@
 import {
   AutoScalingClient,
+  AutoScalingClientConfig,
   DescribeAutoScalingGroupsCommand,
   DescribeAutoScalingGroupsCommandOutput,
   type AutoScalingGroup,
@@ -7,13 +8,14 @@ import {
 import { Instance } from "@aws-sdk/client-ec2"
 import { getEC2Instances } from "./ec2-instances"
 import { mockAutoScalingGroups } from "./mocks/mock-data"
+import { AWS_CONFIG } from "./config"
 
 export async function getAutoScalingGroup(
   asgName: string
 ): Promise<AutoScalingGroup | null> {
   // Uncomment actual SDK call and remove mock data return
   // try {
-  //   const client = new AutoScalingClient()
+  //   const client = new AutoScalingClient(AWS_CONFIG)
   //   const input = {
   //     AutoScalingGroupNames: [asgName],
   //     MaxRecords: 10,
@@ -45,9 +47,9 @@ export async function getAutoScalingGroups(
 ): Promise<AutoScalingGroup[] | null> {
   // Uncomment actual SDK call and remove mock data return
   // try {
-  //   const client = new AutoScalingClient()
+  //   const client = new AutoScalingClient(AWS_CONFIG)
   //   const input = {
-  //     AutoScalingGroupNames: [asgName],
+  //     AutoScalingGroupNames: [...asgNames],
   //     MaxRecords: 10,
   //   }
 
