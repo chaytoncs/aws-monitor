@@ -17,7 +17,7 @@ export default function SideNav() {
   const navItems = [
     { href: "/dashboard", label: "Dashboard", icon: Home },
     {
-      href: "/auto-scaling-groups",
+      href: "/dashboard/auto-scaling-groups",
       label: "Auto Scaling Groups",
       icon: Server,
     },
