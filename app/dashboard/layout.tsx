@@ -18,7 +18,7 @@ export default function Layout({ children }: LayoutProps) {
           <ThemeToggle />
         </div>
         {/* Page content */}
-        <div className='absolute p-8 max-w-7xl mx-auto'>{children}</div>
+        <div className='absolute p-8 w-full mx-auto'>{children}</div>
       </main>
     </div>
   )

@@ -40,6 +40,39 @@ export async function getAutoScalingGroup(
   )
 }
 
+export async function getAutoScalingGroups(
+  asgNames: string[]
+): Promise<AutoScalingGroup[] | null> {
+  // Uncomment actual SDK call and remove mock data return
+  // try {
+  //   const client = new AutoScalingClient()
+  //   const input = {
+  //     AutoScalingGroupNames: [asgName],
+  //     MaxRecords: 10,
+  //   }
+
+  //   const command = new DescribeAutoScalingGroupsCommand(input)
+  //   const response: DescribeAutoScalingGroupsCommandOutput = await client.send(
+  //     command
+  //   )
+
+  //   if (
+  //     !response.AutoScalingGroups ||
+  //     response.AutoScalingGroups.length === 0
+  //   ) {
+  //     return null
+  //   }
+  //   return response?.AutoScalingGroups
+  // } catch (error) {
+  //   return null
+  // }
+  return (
+    mockAutoScalingGroups.filter((asg) =>
+      asgNames.includes(asg.AutoScalingGroupName || "")
+    ) || null
+  )
+}
+
 export interface ASGWithInstances extends AutoScalingGroup {
   EC2Instances: Instance[]
 }
@@ -65,4 +98,26 @@ export async function getASGWithInstances(
       )
     ),
   }
+}
+
+export async function getASGsWithInstances(
+  asgNames: string[]
+): Promise<ASGWithInstances[] | null> {
+  const asgs = await getAutoScalingGroups(asgNames)
+  if (!asgs) {
+    return null
+  }
+  const allInstanceIds = asgs.flatMap(
+    (asg) => asg.Instances?.map((instance) => instance.InstanceId || "") || []
+  )
+  const ec2Instances = await getEC2Instances(allInstanceIds)
+
+  return asgs.map((asg) => ({
+    ...asg,
+    EC2Instances: ec2Instances.filter((instance) =>
+      asg.Instances?.some(
+        (asgInstance) => asgInstance.InstanceId === instance.InstanceId
+      )
+    ),
+  }))
 }
