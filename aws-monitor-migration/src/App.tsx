@@ -4,6 +4,7 @@ import Dashboard from "./dashboard/pages/Dashboard"
 import { ThemeProvider } from "@emotion/react"
 import theme from "./theme"
 import { CssBaseline } from "@mui/material"
+import "./fonts"
 
 function App() {
   return (

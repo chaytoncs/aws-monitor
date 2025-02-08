@@ -9,10 +9,13 @@ const LoginCard = styled(Card)(({ theme }) => ({
   backgroundColor: theme.palette.custom.oxfordBlue,
   color: theme.palette.custom.seasalt,
   [theme.breakpoints.up("sm")]: {
-    width: "600px",
+    width: "550px",
   },
   boxShadow: `0 0 10px 0 ${theme.palette.custom.taupeGray}`,
   borderRadius: "15px",
+  height: "auto",
+  justifyContent: "center",
+  alignItems: "center",
 }))
 
 export default LoginCard

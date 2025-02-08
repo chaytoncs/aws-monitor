@@ -9,6 +9,7 @@ const LoginButton = styled(Button)(({ theme }) => ({
   },
   fontSize: "1rem",
   fontFamily: theme.typography.fontFamily,
+  width: "100%",
 }))
 
 export default LoginButton
