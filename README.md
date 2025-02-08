@@ -14,5 +14,5 @@ AWS Monitor is a React-based application for monitoring AWS Auto Scaling Groups 
 To integrate this application with actual AWS services, follow these steps:
 
 1. Install NPM Install
-2. Setup AWS_REGION in .env and set default region in \_lib/aws/config.ts
+2. Setup AWS_REGION in .env and set default region in \_lib/aws/config.ts. If your'e not running this locally, or having issues with your local credentials not being read, put your ASW SDK credentials into a .env and use them in the config instead.
 3. Remove mocked results and uncomment AWS SDK Code in \_lib/aws/auto-scaling-groups.ts and \_lib/aws/ec2-instances.ts
